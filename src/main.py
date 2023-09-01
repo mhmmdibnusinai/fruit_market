@@ -1,28 +1,64 @@
-#init harga
+# Init harga
 priceApel = 10000
-pricejeruk =15000
+priceJeruk = 15000
 priceAnggur = 20000
-#input jumlah buah
-nApel =int(input("input jumlah apel; "))
-njeruk =int(input("input jumlah jeruk; "))
-nAnggur = int(input("input jumlah anggur; "))
 
-#hitung harga per buah
-totalPriceApel = nApel *priceApel
-totalPriceJeruk = njeruk *pricejeruk
-totalPriceAnggur = nAnggur * priceAnggur
+# init stock
+stockApel = 10
+stockJeruk = 15
+stockAnggur = 8
 
-#hitung harga total buah
-priceTotal = totalPriceApel + totalPriceJeruk + totalPriceAnggur
+#deklarasi jumlah buah
+def input_fruit(name, stock, price):
+    """_summary_
 
-#show
-print(
+    Args:
+        name (_type_): _description_
+        stock (_type_): _description_
+        price (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    while True:
+        n = int(input(f'Input jumlah {name.capitalize()}: '))
+        if n <= stock:
+            price = n * price
+            break
+        else:
+            print(f'Jumlah terlalu banyak. {name.capitalize()} sisa {stock}')
+    return price, n
+
+
+# Hitung harga per buah
+totalPriceApel, nApel = input_fruit ('apel', stockApel, priceApel)
+totalPriceJeruk, nJeruk = input_fruit ('jeruk', stockJeruk, priceJeruk)
+totalPriceAnggur, nAnggur = input_fruit ('anggur', stockAnggur, priceAnggur)
+
+# Hitung harga total buah
+priceTotal = totalPriceAnggur + totalPriceApel + totalPriceJeruk
+
+# show
+print (
     f'''
-Detai Belanja
+Detail Belanja
 
-Apel    : {nApel} X {priceApel}
-jeruk   : {njeruk} x {pricejeruk}
-Anggur  : {nAnggur} x {priceAnggur}
-Total   : {priceTotal}
+Apel : {nApel} x {priceApel} = Rp {totalPriceApel}
+Jeruk : {nJeruk} x {priceJeruk} = Rp {totalPriceJeruk}
+Anggur : {nAnggur} x {priceAnggur} = Rp {totalPriceAnggur}
+Total : Rp {priceTotal}
 '''
 )
+
+while True:
+    npembayaran = (int(input('Silahkan masukan nominal uang untuk membayar: ')))
+    selisihpembayaran = npembayaran - priceTotal
+    if npembayaran < priceTotal:
+        print (f'Maaf jumlah kekurangan yang anda harus bayar adalah: Rp. {selisihpembayaran}')
+    elif npembayaran > priceTotal:
+        print(f'Terimakasih, berikut jumlah kembaliannya:Rp. {selisihpembayaran}')
+        break
+    else:
+        npembayaran == selisihpembayaran
+        print(f'Terimakasih')
+        break
