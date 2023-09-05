@@ -1,64 +1,77 @@
-# Init harga
-priceApel = 10000
-priceJeruk = 15000
-priceAnggur = 20000
+import fruit_market as fm
 
-# init stock
-stockApel = 10
-stockJeruk = 15
-stockAnggur = 8
+#init database
+db = [
+    ["index","nama","stock", "harga" ],
+    [0, "Apel", 20, 10000],
+    [1, "Jeruk", 15, 15000],
+    [2, "Anggur", 25, 20000],
+]
 
-#deklarasi jumlah buah
-def input_fruit(name, stock, price):
+#define prompt display
+PROMPT = '''
+Selamat datang di pasar buah
+
+List menu:
+1. Menampilkan daftar buah
+2. Menampilkan buah
+3. Menghapus buah
+4. Membeli buah
+5. Exit
+'''
+#define main menu
+def main():
     """_summary_
-
-    Args:
-        name (_type_): _description_
-        stock (_type_): _description_
-        price (_type_): _description_
-
-    Returns:
-        _type_: _description_
-    """
+    """   
     while True:
-        n = int(input(f'Input jumlah {name.capitalize()}: '))
-        if n <= stock:
-            price = n * price
+        print(PROMPT) 
+        menu = int(input('> Silahkan pilih menu: '))
+
+        if menu == 1:
+            fm.show(db)
+        elif menu == 2:
+            fm.add(db)
+        elif menu == 3:
+            fm.delete(db)
+        elif menu == 4:
+            fm.buy(db)
+        elif menu == 5:
             break
         else:
-            print(f'Jumlah terlalu banyak. {name.capitalize()} sisa {stock}')
-    return price, n
+            print("Menu tidak tersedia")
 
+if __name__ == '__main__':
+        main()
 
-# Hitung harga per buah
-totalPriceApel, nApel = input_fruit ('apel', stockApel, priceApel)
-totalPriceJeruk, nJeruk = input_fruit ('jeruk', stockJeruk, priceJeruk)
-totalPriceAnggur, nAnggur = input_fruit ('anggur', stockAnggur, priceAnggur)
+# # Hitung harga per buah
+# totalPriceApel, nApel = input_fruit ('apel', stockApel, priceApel)
+# totalPriceJeruk, nJeruk = input_fruit ('jeruk', stockJeruk, priceJeruk)
+# totalPriceAnggur, nAnggur = input_fruit ('anggur', stockAnggur, priceAnggur)
 
-# Hitung harga total buah
-priceTotal = totalPriceAnggur + totalPriceApel + totalPriceJeruk
+# # Hitung harga total buah
+# priceTotal = totalPriceAnggur + totalPriceApel + totalPriceJeruk
 
-# show
-print (
-    f'''
-Detail Belanja
+# # show
+# print (
+#     f'''
+# Detail Belanja
 
-Apel : {nApel} x {priceApel} = Rp {totalPriceApel}
-Jeruk : {nJeruk} x {priceJeruk} = Rp {totalPriceJeruk}
-Anggur : {nAnggur} x {priceAnggur} = Rp {totalPriceAnggur}
-Total : Rp {priceTotal}
-'''
-)
+# Apel : {nApel} x {priceApel} = Rp {totalPriceApel}
+# Jeruk : {nJeruk} x {priceJeruk} = Rp {totalPriceJeruk}
+# Anggur : {nAnggur} x {priceAnggur} = Rp {totalPriceAnggur}
+# Total : Rp {priceTotal}
+# '''
+# )
 
-while True:
-    npembayaran = (int(input('Silahkan masukan nominal uang untuk membayar: ')))
-    selisihpembayaran = npembayaran - priceTotal
-    if npembayaran < priceTotal:
-        print (f'Maaf jumlah kekurangan yang anda harus bayar adalah: Rp. {selisihpembayaran}')
-    elif npembayaran > priceTotal:
-        print(f'Terimakasih, berikut jumlah kembaliannya:Rp. {selisihpembayaran}')
-        break
-    else:
-        npembayaran == selisihpembayaran
-        print(f'Terimakasih')
-        break
+# while True:
+#     npembayaran = (int(input('Silahkan masukan nominal uang untuk membayar: ')))
+#     selisihpembayaran = npembayaran - priceTotal
+#     if npembayaran < priceTotal:
+#         print (f'Maaf jumlah kekurangan yang anda harus bayar adalah: Rp. {selisihpembayaran}')
+#     elif npembayaran > priceTotal:
+#         print(f'Terimakasih, berikut jumlah kembaliannya:Rp. {selisihpembayaran}')
+#         break
+#     else:
+#         npembayaran == selisihpembayaran
+#         print(f'Terimakasih')
+#         break
